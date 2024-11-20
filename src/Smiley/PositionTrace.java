@@ -1,4 +1,6 @@
 // posição na grelha
+package Smiley;
+
 record Position(int line, int col) {
 	
 	// é adjacente outra posição?
@@ -7,7 +9,7 @@ record Position(int line, int col) {
 	}
 }
 
-class PositionTrace {
+public class PositionTrace {
 	
 	// caminho (posicoes visitadas)
 	private Position[] path;
@@ -16,7 +18,7 @@ class PositionTrace {
 	private int visited;
 	
 	// inicializado com o número de passos que podem ser dados
-	PositionTrace(int energy) {
+    public PositionTrace(int energy) {
 		assert energy >= 0;
 		path = new Position[1 + energy];
 		path[0] = new Position(0, 0);

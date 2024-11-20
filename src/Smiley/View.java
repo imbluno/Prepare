@@ -1,3 +1,5 @@
+package Smiley;
+
 import pt.iscte.guitoo.Color;
 import pt.iscte.guitoo.StandardColor;
 import pt.iscte.guitoo.board.Board;
@@ -18,20 +20,25 @@ public class View {
 	// qual o ícone na posição (line, col)?
 	// null significa não haver ícone
 	String icon(int line, int col) {
-		// TODO interrogar model para saber a posição atual
-		return "happy.png";
+		if(model.last().line() == line && model.last().col() == col){
+			return "src/Smiley/happy.png";
+		}
+		return null;
 	}
 
 	// executa cada vez que é clicada uma posição do tabuleiro (line, col)
 	void click(int line, int col) {
-		// TODO fazer movimento
-		board.showMessage(line + ", " + col);
-		board.setTitle(line + ", " + col);
+			model.moveTo(new Position (line, col));
+			//board.showMessage(line + ", " + col);
+			//board.setTitle(line + ", " + col);
+
 	}
 
 	// qual a cor de fundo da posição (line, col)?
 	Color background(int line, int col) {
-		// TODO interrogar model para saber se a posição foi visitada
+		if(model.isVisited(new Position(line, col))){
+			return StandardColor.WHITE;
+		}
 		return StandardColor.GRAY;
 	}
 
