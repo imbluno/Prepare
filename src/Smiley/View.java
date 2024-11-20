@@ -10,7 +10,7 @@ public class View {
 
 	View(PositionTrace model) {
 		this.model = model;
-		board = new Board("Tabuleiro", 4, 6, 40);
+		board = new Board("Energia: " + model.energy(), 4, 6, 40);
 		board.setIconProvider(this::icon);
 		board.addMouseListener(this::click);
 		board.setBackgroundProvider(this::background);
@@ -20,7 +20,9 @@ public class View {
 	// qual o ícone na posição (line, col)?
 	// null significa não haver ícone
 	String icon(int line, int col) {
-		if(model.last().line() == line && model.last().col() == col){
+		if(model.last().line() == line && model.last().col() == col && model.energy() == 0){
+			return "src/Smiley/sad.png";
+		} else if(model.last().line() == line && model.last().col() == col){
 			return "src/Smiley/happy.png";
 		}
 		return null;
@@ -30,7 +32,7 @@ public class View {
 	void click(int line, int col) {
 			model.moveTo(new Position (line, col));
 			//board.showMessage(line + ", " + col);
-			//board.setTitle(line + ", " + col);
+			board.setTitle("Energia: " + model.energy());
 
 	}
 
@@ -43,7 +45,7 @@ public class View {
 	}
 	//test
 	// executa quando o botão é primido
-	void action() {
+	public void action() {
 		int energy = board.promptInt("Energia?");
 		if (energy >= 0) {
 			PositionTrace newModel = new PositionTrace(energy);
@@ -57,7 +59,7 @@ public class View {
 	}
 
 	public static void main(String[] args) {
-		View gui = new View(new PositionTrace(10));
-		gui.start();
+		View gui = new View(new PositionTrace(0));
+		gui.action();
 	}
 }
