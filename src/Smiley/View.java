@@ -59,7 +59,7 @@ public class View {
 	}
 
 	public static void main(String[] args) {
-		View gui = new View(new PositionTrace(0));
-		gui.action();
+		View gui = new View(new PositionTrace(10));
+		gui.start();
 	}
 }
