@@ -41,7 +41,7 @@ public class View {
 		}
 		return StandardColor.GRAY;
 	}
-
+	//test
 	// executa quando o botão é primido
 	void action() {
 		int energy = board.promptInt("Energia?");
